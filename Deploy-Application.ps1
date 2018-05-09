@@ -61,15 +61,15 @@ Try {
 	##* VARIABLE DECLARATION
 	##*===============================================
 	## Variables: Application
-	[string]$appVendor = ''
-	[string]$appName = ''
+	[string]$appVendor = 'Trimble'
+	[string]$appName = 'GPS Pathfinder'
 	[string]$appVersion = ''
 	[string]$appArch = ''
 	[string]$appLang = 'EN'
 	[string]$appRevision = '01'
-	[string]$appScriptVersion = '3.7.0.1'
-	[string]$appScriptDate = '03/22/2018'
-	[string]$appScriptAuthor = '<author name>'
+	[string]$appScriptVersion = '1.0.0.0'
+	[string]$appScriptDate = '05/09/2018'
+	[string]$appScriptAuthor = 'Steve Patterson'
 	##*===============================================
 	## Variables: Install Titles (Only set here to override defaults set by the toolkit)
 	[string]$installName = ''
@@ -137,7 +137,24 @@ Try {
 		}
 
 		## <Perform Installation tasks here>
+            New-Item -Path "C:\Downloaded Installations\Trimble\" -Type Directory -Force
+            Copy-Item -Path "GPS Pathfinder Office.msi" -Destination "C:\Downloaded Installations\Trimble\"  -Force
 
+             $Str_MSIPathAndFile = "C:\Downloaded Installations\Trimble\GPS Pathfinder Office.msi"
+             $MSIPath=split-path $Str_MSIPathAndFile
+             $ProductCode='{9D31CAF2-514C-41FB-BFBE-6D7164F8FC62}'
+
+             $Com_WI = New-Object -ComObject WindowsInstaller.Installer
+
+             $codeInvokeMethod = {
+                 $type = $this.gettype();
+                 $index = $args.count - 1;
+                 $methodargs = $args[1..$index]
+                 $type.invokeMember($args[0], [System.Reflection.BindingFlags]::InvokeMethod, $null, $this, $methodargs)
+             }
+             $Com_WI = $Com_WI | Add-Member -MemberType ScriptMethod -Value $codeInvokeMethod -Name InvokeMethod -PassThru
+
+             $Com_WI.InvokeMethod('AddSource',"$productcode",'',"$MSIPath")
 
 		##*===============================================
 		##* POST-INSTALLATION
