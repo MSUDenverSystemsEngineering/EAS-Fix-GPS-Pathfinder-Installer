@@ -137,8 +137,8 @@ Try {
 		}
 
 		## <Perform Installation tasks here>
-            New-Item -Path "C:\Downloaded Installations\Trimble\" -Type Directory -Force
-            Copy-Item -Path "GPS Pathfinder Office.msi" -Destination "C:\Downloaded Installations\Trimble\"  -Force
+             New-Item -Path "C:\Downloaded Installations\Trimble\" -Type Directory -Force
+             Copy-Item -Path "$scriptDirectory\Files\GPS Pathfinder Office.msi" -Destination "C:\Downloaded Installations\Trimble\"
 
              $Str_MSIPathAndFile = "C:\Downloaded Installations\Trimble\GPS Pathfinder Office.msi"
              $MSIPath=split-path $Str_MSIPathAndFile
