@@ -140,7 +140,7 @@ Try {
              New-Item -Path "C:\Downloaded Installations\Trimble\" -Type Directory -Force
              Copy-Item -Path "$scriptDirectory\Files" -Destination "C:\Downloaded Installations\Trimble" -Force -Recurse
 
-             $Str_MSIPathAndFile = "C:\Downloaded Installations\Trimble\GPS Pathfinder Office.msi"
+             $Str_MSIPathAndFile = "C:\Downloaded Installations\Trimble\Files\GPS Pathfinder Office.msi"
              $MSIPath=split-path $Str_MSIPathAndFile
              $ProductCode='{9D31CAF2-514C-41FB-BFBE-6D7164F8FC62}'
 
